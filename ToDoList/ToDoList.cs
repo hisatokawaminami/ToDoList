@@ -1,58 +1,31 @@
-using System;
+using System.Collections.Generic;
 
-namespace Leetspeak{
-  public class Translate
+namespace ToDoList.Models
+{
+  public class Item
   {
-    public void Run()
-    {
-      Console.WriteLine("Please enter letters");
-      string inputLetters = Console.ReadLine();
+    private string _description;
+    private static List<Item> _instances = new List<Item> {};
 
-      char[]letters = inputLetters.ToCharArray();
-      for(int i = 0; i < letters.Length; i++)
-      {
-        if (!(i == 0 && (letters[i] == 's' || letters[i] == 'S')))
-        {
-          letters[i] = TranslateToLeet(letters[i]);
-        }
-      }
-      Console.WriteLine(letters);
-      Console.WriteLine(new String(letters));
+    public Item (string description)
+    {
+      _description = description;
     }
-
-    public char TranslateToLeet (char letter)
+    public string GetDescription()
     {
-      if (letter == 'e' || letter == 'E')
-      {
-        return '3';
-      }
-      else if (letter == 'o' || letter == 'O')
-      {
-        return '0';
-      }
-      else if (letter == 'I')
-      {
-        return '1';
-      }
-      else if (letter == 't' || letter == 'T')
-      {
-        return '7';
-      }
-      else if (letter == 's' || letter == 'S')
-      {
-        return 'z';
-      }
-
-      return letter;
+      return _description;
     }
-  }
-
-  public class Program
-  {
-    public static void Main()
+    public void SetDescription(string newDescription)
     {
-      Translate translator = new Translate();
-      translator.Run();
+      _description = newDescription;
+    }
+    public static List<Item> GetAll()
+    {
+      return _instances;
+    }
+    public void Save()
+    {
+      _instances.Add(this); 
     }
   }
 }

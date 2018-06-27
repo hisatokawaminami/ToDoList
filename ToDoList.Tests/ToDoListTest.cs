@@ -1,42 +1,38 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Leetspeak;
+using ToDoList.Models;
 
-namespace Leetspeak.Tests
+namespace ToDoList.Tests
 {
   [TestClass]
-  public class TranslateTest
+  public class ItemTest
   {
     [TestMethod]
-    public void TranslateTo3_CharactorE()
+    public void GetDescription_ReturnsDescription_String()
     {
-      Translate testLeetspeak = new Translate();
-      Assert.AreEqual('3', testLeetspeak.TranslateToLeet('e'));
-    }
-    [TestMethod]
-    public void TranslateTo0_CharactorO()
-    {
-      Translate testLeetspeak = new Translate();
-      Assert.AreEqual('0', testLeetspeak.TranslateToLeet('o'));
-    }
-    [TestMethod]
-    public void TranslateTo1_CharactorCapI()
-    {
-      Translate testLeetspeak = new Translate();
-      Assert.AreEqual('1', testLeetspeak.TranslateToLeet('I'));
-    }
-    [TestMethod]
-    public void TranslateTo7_CharactorT()
-    {
-      Translate testLeetspeak = new Translate();
-      Assert.AreEqual('7', testLeetspeak.TranslateToLeet('T'));
-    }
-    [TestMethod]
-    public void TranslateToZ_CharactorS()
-    {
-      Translate testLeetspeak = new Translate();
-      Assert.AreEqual('z', testLeetspeak.TranslateToLeet('s'));
-    }
+      //Arrange
+      string description = "Walk the dog.";
+      Item newItem = new Item(description);
+      newItem.Save();
 
+      //Act
+      string result = newItem.GetDescription();
 
+      //Assert
+      Assert.AreEqual(description, result);
+    }
+    [TestMethod]
+    public void SetDescription_SetDescription_String()
+    {
+      //Arrange
+      string description = "Walk the dog.";
+      Item newItem = new Item(description);
+
+      //Act
+      newItem.SetDescription("Do the dishes");
+      string result = newItem.GetDescription();
+
+      //Assert
+      Assert.AreEqual(description, result);
+    }
   }
 }
